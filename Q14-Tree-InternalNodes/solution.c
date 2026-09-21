@@ -1,18 +1,24 @@
-﻿#include<stdio.h>
-#include<stdlib.h>
-struct Node{int data;struct Node*left,*right;};
-struct Node* newNode(int d){
-    struct Node*n=(struct Node*)malloc(sizeof(struct Node));
-    n->data=d;n->left=n->right=NULL;return n;
-}
-int internal(struct Node*root){
-    if(!root||(!root->left&&!root->right)) return 0;
-    return 1+internal(root->left)+internal(root->right);
-}
-int main(){
-    struct Node*root=newNode(1);
-    root->left=newNode(2);root->right=newNode(3);
-    root->left->left=newNode(4);root->left->right=newNode(5);
-    printf("Internal nodes = %d\n",internal(root));
-    return 0;
-}
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def internal(root):
+    if root is None or (root.left is None and root.right is None):
+        return 0
+
+    return 1 + internal(root.left) + internal(root.right)
+
+
+# Creating the tree
+root = Node(1)
+
+root.left = Node(2)
+root.right = Node(3)
+
+root.left.left = Node(4)
+root.left.right = Node(5)
+
+print("Internal nodes =", internal(root))
